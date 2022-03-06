@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 서블릿 설정 -->
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<!-- 주소 앞 쪽에는 /WEB-INF/views/ 붙이고 뒤에는 .jsp 붙이기  -->
+	</beans:bean>
+	
+	<context:component-scan base-package="com.care.root" />
+	
+	<beans:bean id = "autoLogin" class="com.care.root.AutoLoginInterceptor"/>
+	
+	<beans:bean id = "loginChk" class="com.care.root.board.interceptor.BoardInterceptor"/>
+	<!-- 로그인 되어 있는지 확인하기 >> BoardInterceptor에서 확인용으로 사용 -->
+	
+	<interceptors> 
+		<interceptor>
+			<mapping path="/board/writeForm" />
+			<mapping path="/member/memberInfo" />
+			<!-- 위의 해당 경로들 요청시 -->
+			<beans:ref bean="loginChk"/>
+			<!-- beans로 등록된 loginChk 실행 >> BoardInterceptor 실행됨!!! -->
+		</interceptor>
+		<!-- interceptor를 사용하여 /board/writeForm 혹은 /member/memberInfo 요청 시 모두 결과 반복적인 작업 효율적으로 실행하기 위한 bean인 loginChk로 실행됨 
+		loginChk는 위에서 선언 시 BoardInterceptor를 사용한다함 == BoardInterceptor 내용 실행!-->
+		
+		<interceptor>
+			<mapping path="/index" />
+			
+			<!-- <mapping path="/member/login/" /> -->
+			<beans:ref bean="autoLogin"/>
+			<!-- index 실행시키면 autoLogin도 실행시켜주세요. -->
+		</interceptor>
+	</interceptors>
+	<!-- interceptor를 통해 로그인이 되어 있을 경우 작성 권한 주어지고 만약 로그인 안되어 있을 시 작성 못하게 막는 interceptor -->
+	
+	
+	<!-- 파일 업로드 객체 설정 --> 
+<beans:bean id="multipartResolver" 
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+   <beans:property name="maxUploadSize" value="52428800"/><!-- 50MB --> 
+</beans:bean>
+	
+</beans:beans>

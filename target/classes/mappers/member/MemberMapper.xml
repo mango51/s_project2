@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  연결시켜주는 다리 역할 mapper -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.care.root.mybatis.member.MemberMapper">
+<!-- xml 파일의 namespace에 인터페이스 파일 com.care.root.mybatis.member 넣어서 xml과 인터페이스 파일 연결(매핑)시켜주기 -->
+<!-- 어디에 연결시켜줄 껀지 namespace에 주소 입력 -->
+	<resultMap type="com.care.root.member.dto.MemberDTO" id="member">
+		<!-- DTO 연결하기, id는 어떠한 이름으로 쓸 껀지 설정 -->
+		<id property="id" column="id" />
+		<!-- primary key라서 id로 설정 -->
+		<result property="pw" column="pw"/>
+		<result property="addr" column="addr"/>
+		<result property="limitTime" column="limitTime" /> <!-- 확인 필요?? -->
+		<result property="sessionId" column="sessionId" /> <!-- 확인필요?? -->
+	</resultMap>
+	<select id="getMember" resultMap="member">
+		select * from membership where id=#{id}
+	</select>
+	<select id = "memberInfo" resultMap = "member">
+		select * from membership
+	</select>
+	<!--  member 데이터랑 연결시켜주기 -->
+	<insert id="register">
+		insert into membership(id,pw,addr,session_id) values(#{id},#{pw},#{addr},#{sessionId})
+	</insert>
+	<update id ="keepLogin">
+		update membership set session_id =#{sessionId}, limit_time=#{limitDate} where id =#{id}
+	</update>
+	
+	<select id="getUserSession" resultMap="member">
+		select * from membership where session_id=#{sessionId}
+	</select>
+</mapper>
