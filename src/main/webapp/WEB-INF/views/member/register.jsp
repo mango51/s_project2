@@ -51,10 +51,16 @@
 	
 	function register(){
 		var id = $("#id").val()
+		var name=$('#name').val()
 		if(id==""){
 			alert("아이디는 필수 항목입니다!")
 			$("#id").focus()
-		} else{
+		}
+		if(name==""){
+			alert("이름은 필수 항목입니다!")
+			$("#name").focus()
+		}
+		else{
 			var addr = $("#addr1").val()+"/"+$("#addr2").val()+"/"+$("#addr3").val()
 			// "/"를 통해 주소 구분하기
 			$("#addr1").val(addr)
@@ -97,9 +103,10 @@
 		<form action="register" id="fo" method="post">
 			<table border="1">
 				<tr>
-					<td><input type="text" name="id" id='id' placeholder="input id">(*필수항목)<br>
-						<input type="text" name="pw" id="pw1" placeholder="input pass"><br>
-						<input type="text" id="pw2" placeholder="input pass again" onchange="pwdChk()">
+					<td><input type="text" name="id" id='id' placeholder="아이디">(*필수항목)<br>
+					<input type="text" name="name" id='name' placeholder="이름">(*필수항목)<br>
+						<input type="text" name="pw" id="pw1" placeholder="비밀번호"><br>
+						<input type="text" id="pw2" placeholder="비밀번호 재입력" onchange="pwdChk()">
 						<!-- onchange : 커서가 인풋 박스에서 "벗어나면" pwdChk() 함수 실행해라 -->
 						<label id="label"> </label>
 						<br>

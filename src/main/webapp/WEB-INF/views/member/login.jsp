@@ -65,10 +65,7 @@
     font-weight: 600;
     text-decoration: none;
 }
-.placing{
-	margin-left :auto;
-	margin-right: auto;
-}
+
 
 .filebox .upload-name {
     display: inline-block;
@@ -123,15 +120,15 @@ function readURL(input){
 	<form action="${contextPath }/member/user_check" method="post">
             <div class="wrap row">
             
-                <div class="login-form-2 placing">
+                <div class="login-form-2">
                             <label class="btnSubmit" for="input-file" onchange="readURL(this)">
                             	금융인증서 확인
                             </label>
-    						<input type="file" id="input-file" name="file" style="margin-left :auto; margin-right: auto;"/>	
+    						<input type="file" id="input-file" name="file"/>	
     						
                     
                 </div>
-                <div class="login-form-1 placing">
+                <div class="login-form-1">
                    
                     
                     

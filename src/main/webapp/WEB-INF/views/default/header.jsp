@@ -46,8 +46,9 @@
 
 .navdiv {
 	width: 100%;
-	border-bottom : 1px solid #1E90FF;
+	border-bottom : 1px solid #3C5A91;
 	padding-top : 20px;
+	
 	
 }
 .setting{
@@ -126,7 +127,8 @@ nav ul li a:hover {
 					<li class="setting">
 						<a href="${contextPath }/board/boardAllList">고객센터</a>
 					</li>
-					
+					<c:choose>
+					<c:when test="${loginUser eq 'aaa'}">
 					<li class="setting">
 						<%--<c:choose>
 							<c:when test="${loginUser != null}">
@@ -139,6 +141,19 @@ nav ul li a:hover {
 						
 						<a href="${contextPath }/member/memberInfo"> 마이페이지 </a>
 					</li>
+					</c:when>
+					</c:choose>
+					
+					<c:choose>
+					<c:when test="${loginUser eq 'aaa'}">
+					<li class="setting">
+					
+						
+						<a href="${contextPath }/member/productList"> 상품등록 </a>
+					</li>
+					</c:when>
+					</c:choose>
+					
 
 					<li class="setting">
 						<c:choose>

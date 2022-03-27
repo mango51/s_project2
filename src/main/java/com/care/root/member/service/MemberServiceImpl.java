@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 		}
 		else if(a==0) {
-			return 1;
+			return 2;
 		}
 		return 1;
 	}
@@ -45,12 +45,20 @@ public class MemberServiceImpl implements MemberService{
 	public void memberInfo(Model model) {
 		model.addAttribute("memberList", mapper.memberInfo());
 	}
+	public void productList(Model model) {
+		model.addAttribute("productList",mapper.getProduct());
+	}
+	public void showMoney(Model model) {
+		model.addAttribute("showMoneyList", mapper.memberInfo());
+	}
 	public void info(String userid, Model model) {
 		//오버라이딩하기
 		MemberDTO dto = mapper.getMember(userid);
 		System.out.println(dto.getId());
+		System.out.println(dto.getName());
 		System.out.println(dto.getPw());
 		System.out.println(dto.getAddr());
+		
 		model.addAttribute("info", dto);
 		// 데이터 dto를 model을 통해  info에 전달
 	}

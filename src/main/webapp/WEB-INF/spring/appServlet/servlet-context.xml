@@ -34,6 +34,8 @@
 		<interceptor>
 			<mapping path="/board/writeForm" />
 			<mapping path="/member/memberInfo" />
+			<mapping path="/money/sendMoney" />
+			<mapping path="/money/showMoney" />
 			<!-- 위의 해당 경로들 요청시 -->
 			<beans:ref bean="loginChk"/>
 			<!-- beans로 등록된 loginChk 실행 >> BoardInterceptor 실행됨!!! -->

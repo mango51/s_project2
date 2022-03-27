@@ -41,6 +41,11 @@ public class HomeController {
 		System.out.println("index 실행");
 		return "index";
 	}
+	@GetMapping("admin")
+	public String admin() {
+		System.out.println("admin 실행");
+		return "admin";
+	}
 	// 아까 버젼 수정 안해서 오류남! 
 	// index치면 index.jsp 페이지 나옴
 	

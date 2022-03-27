@@ -7,8 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script>
+	
+</script>
 </head>
 <body>
 	<c:import url="../default/header.jsp"/>
+	<c:import url="../default/main.jsp"/>
+	
 </body>
 </html>

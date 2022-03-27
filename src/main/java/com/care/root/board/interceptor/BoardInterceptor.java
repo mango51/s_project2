@@ -18,7 +18,9 @@ public class BoardInterceptor extends HandlerInterceptorAdapter implements Membe
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
+		System.out.println("인터셉터");
 		if(session.getAttribute(LOGIN)==null) {
+			System.out.println("로그인 안되어있음");
 			//로그인하지 않았을 경우
 			response.setContentType("text/html;charset=utf-8"); //사용자에게 html 문자열 형태로 응답할 것임
 			PrintWriter out = response.getWriter(); //응답할 내용(보낼 내용) getWriter()사용하여 출력 가능한 형태로 만들기 >> 변수 out에 대입

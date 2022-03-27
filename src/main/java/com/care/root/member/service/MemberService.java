@@ -14,4 +14,6 @@ public interface MemberService{
 	public int register(MemberDTO dto);
 	public void keepLogin(String sessionId, java.sql.Date limitDate, String id);
 	public MemberDTO getUserSession(String sessionID);
+	public void showMoney(Model model);
+	public void productList(Model model);
 }

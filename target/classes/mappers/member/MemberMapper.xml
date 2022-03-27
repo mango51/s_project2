@@ -10,11 +10,26 @@
 		<!-- DTO 연결하기, id는 어떠한 이름으로 쓸 껀지 설정 -->
 		<id property="id" column="id" />
 		<!-- primary key라서 id로 설정 -->
+		<result property="name" column="name"/>
 		<result property="pw" column="pw"/>
 		<result property="addr" column="addr"/>
 		<result property="limitTime" column="limitTime" /> <!-- 확인 필요?? -->
 		<result property="sessionId" column="sessionId" /> <!-- 확인필요?? -->
 	</resultMap>
+	
+	<resultMap type="com.care.root.member.dto.ProductDTO" id="product">
+		<!-- DTO 연결하기, id는 어떠한 이름으로 쓸 껀지 설정 -->
+		<id property="id" column="id" />
+		<!-- primary key라서 id로 설정 -->
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="img_name" column="img_name"/>
+		
+	</resultMap>
+	<select id="getProduct" resultMap="product">
+		select * from product
+	</select>
+	
 	<select id="getMember" resultMap="member">
 		select * from membership where id=#{id}
 	</select>
@@ -22,8 +37,11 @@
 		select * from membership
 	</select>
 	<!--  member 데이터랑 연결시켜주기 -->
+	<select id = "showMoney" resultMap = "member">
+		select * from membership
+	</select>
 	<insert id="register">
-		insert into membership(id,pw,addr,session_id) values(#{id},#{pw},#{addr},#{sessionId})
+		insert into membership(id,name,pw,addr,session_id) values(#{id},#{name},#{pw},#{addr},#{sessionId})
 	</insert>
 	<update id ="keepLogin">
 		update membership set session_id =#{sessionId}, limit_time=#{limitDate} where id =#{id}
